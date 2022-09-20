@@ -32,150 +32,47 @@ console.log(params)
 //action du button
 let button = document.querySelector('#addToCart')
 button.addEventListener("click", () =>{
+
   let product = {
     idProduct : id,
     colorProduct : document.querySelector("#colors").value,
     quantityProduct: document.querySelector("#quantity").value,
-  }   
+  }
 
-let productInLocalStorage = JSON.parse(localStorage.getItem("product"))
-console.log(color.value)
-//console.log(productInLocalStorage[0].colorProduct)
+  let productInLocalStorage = JSON.parse(localStorage.getItem("product"))
+  console.log(color.value)
+  //console.log(productInLocalStorage[0].colorProduct)
+
+  let flag = false
              
-if(productInLocalStorage == null){  
-  console.log('localstorageestnull')
+// Si le storage contient déjà une liste de produits 
+if (productInLocalStorage != null){
+  // Je parcous tous les produits de ma liste
+  for ( i=0; i < productInLocalStorage.length; i++){
+    // Je vérifie si l'id+color du produit du local storage sont égaux à ceux du panier
+    if ( id == productInLocalStorage[i].idProduct && color.value == productInLocalStorage[i].colorProduct ){
+      console.log("les Produits Sont Egaux")
+      console.log(productInLocalStorage[i].quantityProduct)
+      console.log(quantity.value)
+
+      // Si ils sont égaux, je récupère l'ancienne valeur quantité du produit de localstorage, et je lui ajoute la quantité du panier.
+      productInLocalStorage[i].quantityProduct = Number(productInLocalStorage[i].quantityProduct) + Number(quantity.value)
+      // Je réécris le nouveau tableau dans le localstorage
+      localStorage.setItem("product", JSON.stringify(productInLocalStorage))
+      flag = true
+    }
+  }
+  if (flag == false){
+    productInLocalStorage.push(product)
+    localStorage.setItem("product", JSON.stringify(productInLocalStorage))
+  }
+}
+else{
+  console.log('local storage est null')
   productInLocalStorage = []
   productInLocalStorage.push(product)
   localStorage.setItem("product", JSON.stringify(productInLocalStorage))
 }
-else if ( id == productInLocalStorage[0].idProduct && color.value == productInLocalStorage[0].colorProduct ){
-  console.log("lesProduitsSontEgaux")
-  productInLocalStorage[0].quantityProduct += quantityProduct
+})
+
   
-  localStorage.setItem("product", JSON.stringify(productInLocalStorage))        
-}
-
-else{
-  console.log('default')
-  productInLocalStorage.push(product)
-   localStorage.setItem("product", JSON.stringify(productInLocalStorage))
-   
-}
-
- })
-
-
-
-
-/* else if (productInLocalStorage != null){
-  for (i= 0; 1< productInLocalStorage.length; i++){
-    if(productInLocalStorage[i].id == id &&  
-      productInLocalStorage[i].color == select.value
-      ) {
-       return(
-        productInLocalStorage[i].quantity++,
-        localStorage.setItem("product",JSON.stringify(productInLocalStorage)),
-        (productInLocalStorage = JSON.parse(localStorage.getItem("produit")))
-       );
-    }
-  }*/
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   /* let button = document.getElementById("addToCart")
-    // on click, save, add, product selected by ID in local Storage //
-   button.addEventListener("click", () => {
-    // display in local storage all the data we need to make an order //
-    let optionsProduct =  { 
-        id : id,
-        quantity : document.getElementById('quantity').value,
-        color : document.getElementById('colors').value,
-    }
-    let productInLocalStorage = JSON.parse(localStorage.getItem("product"))
-    // s'il y a un produit dans le local storage  //
-    if(productInLocalStorage){
-        productInLocalStorage.push(optionsProduct)
-        localStorage.setItem("product", JSON.stringify(productInLocalStorage))
-    }
-    else if (productInLocalStorage != null){
-      for (i= 0; 1< productInLocalStorage.length; i++){
-        if(productInLocalStorage[i].id == id &&  
-          productInLocalStorage[i].color == select.value
-          ) {
-           return(
-            productInLocalStorage[i].quantity++,
-            localStorage.setItem("product",JSON.stringify(productInLocalStorage)),
-            (productInLocalStorage = JSON.parse(localStorage.getItem("produit")))
-           );
-        }
-      }
-    }
-    // s'il n'y a pas un produit dans le local storage  //
-    else{
-        productInLocalStorage = []
-        productInLocalStorage.push(optionsProduct)
-        console.log(productInLocalStorage)
-        localStorage.setItem("product", JSON.stringify(productInLocalStorage))
-    }
-})*/
-   
-
-
-
-   //let btn = document.querySelector('#addToCart');
-   // btn.addEventListener("click", () => {}
-      
-
-    // -----local storage-----
-    //------stocker la récupération des valeurs du formulaire dans le local storage-----
-
-    /*let product = JSON.parse(localStorage.getItem("produit"));
-   console.log(product);
-    //si il y a deja des produits enregistré dans le local storage
-    if(product){
-      product.push ()
-     
-    }
-    // si il n'y a pas de produit enregistré dans le local storage
-    else{
-      product=[];
-      product.push (objectProduct)
-      console.log(product)
-
-    } */ 
-    
