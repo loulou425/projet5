@@ -31,18 +31,21 @@ console.log(params)
  
 //action du button
 let button = document.querySelector('#addToCart')
-button.addEventListener("click", () =>{
+console.log(document.querySelector("#colors").value)
 
+button.addEventListener("click", () =>{
+  if (document.querySelector("#quantity").value > 0 ){
+    alert("ce produit ajouté au panier")
   let product = {
     idProduct : id,
     colorProduct : document.querySelector("#colors").value,
     quantityProduct: document.querySelector("#quantity").value,
+    price :  price.innerHTML
   }
-
+  
   let productInLocalStorage = JSON.parse(localStorage.getItem("product"))
-  console.log(color.value)
-  //console.log(productInLocalStorage[0].colorProduct)
 
+//Vérificateur de condition
   let flag = false
              
 // Si le storage contient déjà une liste de produits 
@@ -51,28 +54,29 @@ if (productInLocalStorage != null){
   for ( i=0; i < productInLocalStorage.length; i++){
     // Je vérifie si l'id+color du produit du local storage sont égaux à ceux du panier
     if ( id == productInLocalStorage[i].idProduct && color.value == productInLocalStorage[i].colorProduct ){
-      console.log("les Produits Sont Egaux")
-      console.log(productInLocalStorage[i].quantityProduct)
-      console.log(quantity.value)
-
+   
       // Si ils sont égaux, je récupère l'ancienne valeur quantité du produit de localstorage, et je lui ajoute la quantité du panier.
       productInLocalStorage[i].quantityProduct = Number(productInLocalStorage[i].quantityProduct) + Number(quantity.value)
       // Je réécris le nouveau tableau dans le localstorage
       localStorage.setItem("product", JSON.stringify(productInLocalStorage))
+      //la condition est vrai donc je passe mon verifiateur a true
       flag = true
     }
   }
+  //la condition est fausse donc on peux appliquer ce code
+  //le localstorage est rempli mais ce produit n'est pas encore ajouté
   if (flag == false){
     productInLocalStorage.push(product)
     localStorage.setItem("product", JSON.stringify(productInLocalStorage))
   }
 }
+//Si il n'y a pas encore de produit dans le local storage
 else{
   console.log('local storage est null')
   productInLocalStorage = []
   productInLocalStorage.push(product)
   localStorage.setItem("product", JSON.stringify(productInLocalStorage))
 }
-})
+}})
 
   
