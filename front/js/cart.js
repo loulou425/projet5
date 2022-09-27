@@ -111,34 +111,6 @@ totals.innerHTML =
 
 
 
-//---gestion du boutton supprimer l'article---
-/*let cartitems = []
- cartitems = document.querySelectorAll(".cart__item")
-console.log(cartitems)*/
-
-//Sélection des références de tous les boutons btnSupprimer
-let btnSupprimer = document.querySelectorAll(".deleteItem")
-console.log("btn"+btnSupprimer)
-
-for( let i = 0; i < btnSupprimer; i++){
-  btnSupprimer[i].addEventListener("click",(event)=>{
-    event.preventDefault();
-    console.log(event)
-
-    //selection de l'id du produit qui va être supprimer en cliquant sur le bouton
-    let idSupprimer = localprod[i].productId
-    console.log("nullll"+idSupprimer)
-
-    //avec la méthode filter je sélectionne les élements à garder et je supprime l'élément ou le btn suppr a été cliqué
-    localprod = localprod.filter(elem => elem.productId !== idSupprimer )
-    //on envoie la variable dans le local storage
-    //la transformation en forma json et l'envoyer dans la key product du localstorage
-    localStorage.setItem("product", JSON.stringify(localprod))
-
-   alert("ce produit a été supprimer du panier")
-   window.location.href = "cart.html"
-  })
-}
 
 
 
