@@ -102,11 +102,6 @@ totals.innerHTML =
 
             // --- formulaire regex ---
 let form = document.querySelector(".cart__order__form")
-let prenom = document.querySelector("firstName")
-let nom = document.querySelector("lastName")
-let adresse = document.querySelector("address")
-let ville = document.querySelector("city")
-let email = document.querySelector("email")
 
 //regex pour (prenom,nom,adresse, ville)
 let regexName = /^[a-z][a-z '-.,]{1,31}$|^$/i
@@ -228,7 +223,36 @@ form.email.addEventListener("change",function(){
   form.addEventListener("submit",function(e){
     e.preventDefault();
     if(validprenom(form.firstName) && validnom(form.lastName) &&  validaddress(form.address) && validville(form.city) && validemail(form.email)){
-    
-       form.submit
+       form.submit()
     }
   })
+
+  let prenom = document.querySelector("#firstName")
+  console.log(prenom.value)
+    let nom = document.querySelector("#lastName")
+    let adresse = document.querySelector("#address")
+    let ville = document.querySelector("#city")
+    let email = document.querySelector("#email")
+
+  let contact = {
+   firstName : prenom,
+   lastName : nom,
+   address : adresse,
+   city    : ville,
+   email : email
+  }
+  let products = []
+for (product of localprod){
+  products.push(product.idProduct)
+}
+console.log(products)
+  let jsonData = JSON.stringify({ contact, products })
+  console.log(jsonData)
+  fetch( "http://localhost:3000/api/products/order/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: jsonData,
+  })
+
