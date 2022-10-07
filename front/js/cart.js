@@ -17,7 +17,7 @@ cartitem.innerHTML +=
 </div>
 <div class="cart__item__content">
   <div class="cart__item__content__description">
-    <h2>${data.altTxt}</h2>
+    <h2>${data.name}</h2>
     <p>${productcolor}</p>
     <p>${data.price}€</p>
   </div>
@@ -223,23 +223,15 @@ form.email.addEventListener("change",function(){
   form.addEventListener("submit",function(e){
     e.preventDefault();
     if(validprenom(form.firstName) && validnom(form.lastName) &&  validaddress(form.address) && validville(form.city) && validemail(form.email)){
-       form.submit()
-    }
-  })
+    
 
-  let prenom = document.querySelector("#firstName")
-  console.log(prenom.value)
-    let nom = document.querySelector("#lastName")
-    let adresse = document.querySelector("#address")
-    let ville = document.querySelector("#city")
-    let email = document.querySelector("#email")
 
   let contact = {
-   firstName : prenom,
-   lastName : nom,
-   address : adresse,
-   city    : ville,
-   email : email
+   firstName : form.firstName.value,
+   lastName : form.lastName.value,
+   address : form.address.value,
+   city    : form.city.value,
+   email : form.email.value
   }
   let products = []
 for (product of localprod){
@@ -254,5 +246,14 @@ console.log(products)
       "Content-Type": "application/json"
     },
     body: jsonData,
-  })
+  }) 
+
+.then(response=> response.json())
+.then(data =>{
+  document.location="confirmation.html?id="+ data.orderId;
+})
+.catch(e =>(e))
+
+}
+})
 

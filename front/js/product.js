@@ -8,16 +8,13 @@ color = document.querySelector("#colors")
 let params = new URL(document.location).searchParams;
 let id = params.get("id");
 
-console.log(params)
 
  fetch("http://localhost:3000/api/products/" + id)
  .then(reponse => reponse.json())
    .then(data =>{
-    console.log(data) 
-
-
+    
         item__img.innerHTML =`<img src="${data.imageUrl}" alt="Photographie d'un canapé"></img>`
-        title.innerHTML = data.altTxt
+        title.innerHTML = data.name
         price.innerHTML = data.price
         description.innerHTML = data.description
        
@@ -31,7 +28,6 @@ console.log(params)
  
 //action du button
 let button = document.querySelector('#addToCart')
-console.log(document.querySelector("#colors").value)
 
 button.addEventListener("click", () =>{
   if (document.querySelector("#quantity").value > 0 ){
@@ -72,7 +68,6 @@ if (productInLocalStorage != null){
 }
 //Si il n'y a pas encore de produit dans le local storage
 else{
-  console.log('local storage est null')
   productInLocalStorage = []
   productInLocalStorage.push(product)
   localStorage.setItem("product", JSON.stringify(productInLocalStorage))
