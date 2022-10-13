@@ -1,8 +1,8 @@
 items = document.querySelector(".items")
 
 fetch("http://localhost:3000/api/products")
-   .then(reponse => reponse.json())
-   .then(data =>{
+  .then(reponse => reponse.json())
+  .then(data =>{
     console.log(data) 
 
       for (let canape of data){
@@ -15,7 +15,7 @@ fetch("http://localhost:3000/api/products")
     </a>`
       }
       
-    })
-    .catch((error) => {
+  })
+  .catch((error) => {
       alert("Impossible de récupérer les informations du produit", error);
-    })
+  })

@@ -32,7 +32,7 @@ let button = document.querySelector('#addToCart')
 button.addEventListener("click", () =>{
   if (document.querySelector("#quantity").value > 0 ){
     alert("ce produit ajouté au panier")
-  let product = {
+     let product = {
     idProduct : id,
     colorProduct : document.querySelector("#colors").value,
     quantityProduct: document.querySelector("#quantity").value,
@@ -41,15 +41,15 @@ button.addEventListener("click", () =>{
   
   let productInLocalStorage = JSON.parse(localStorage.getItem("product"))
 
-//Vérificateur de condition
+  //Vérificateur de condition
   let flag = false
              
-// Si le storage contient déjà une liste de produits 
+  // Si le storage contient déjà une liste de produits 
 if (productInLocalStorage != null){
   // Je parcous tous les produits de ma liste
   for ( i=0; i < productInLocalStorage.length; i++){
-    // Je vérifie si l'id+color du produit du local storage sont égaux à ceux du panier
-    if ( id == productInLocalStorage[i].idProduct && color.value == productInLocalStorage[i].colorProduct ){
+      // Je vérifie si l'id+color du produit du local storage sont égaux à ceux du panier
+      if ( id == productInLocalStorage[i].idProduct && color.value == productInLocalStorage[i].colorProduct ){
    
       // Si ils sont égaux, je récupère l'ancienne valeur quantité du produit de localstorage, et je lui ajoute la quantité du panier.
       productInLocalStorage[i].quantityProduct = Number(productInLocalStorage[i].quantityProduct) + Number(quantity.value)
@@ -61,16 +61,16 @@ if (productInLocalStorage != null){
   }
   //la condition est fausse donc on peux appliquer ce code
   //le localstorage est rempli mais ce produit n'est pas encore ajouté
-  if (flag == false){
-    productInLocalStorage.push(product)
-    localStorage.setItem("product", JSON.stringify(productInLocalStorage))
+     if (flag == false){
+      productInLocalStorage.push(product)
+      localStorage.setItem("product", JSON.stringify(productInLocalStorage))
   }
 }
-//Si il n'y a pas encore de produit dans le local storage
-else{
-  productInLocalStorage = []
-  productInLocalStorage.push(product)
-  localStorage.setItem("product", JSON.stringify(productInLocalStorage))
+  //Si il n'y a pas encore de produit dans le local storage
+     else{
+      productInLocalStorage = []
+      productInLocalStorage.push(product)
+      localStorage.setItem("product", JSON.stringify(productInLocalStorage))
 }
 }})
 
